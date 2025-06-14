@@ -108,7 +108,16 @@ def home():
     if request.method == "POST":
         word   = request.form.get("word", "")
         result = request.form.get("result", "")
-        output = user_input(0 if (word or result) else 1, word, result)  # your logic
+        if len(word) != 5:
+            output = "The word should have 5 letters"
+        elif len(result) != 5:
+            output = "The result should have 5 letters"
+        elif any(ch not in "xyg" for ch in result):
+            output = "The result should only contain x, y or g"
+        elif any(ch not in "abcdefghijklmnopqrstuvwxyz" for ch in word):
+            output = "The word should only contains characters in the alphabet"
+        else:
+            output = user_input(0 if (word or result) else 1, word, result)  # your logic
     return render_template("index.html", output=output)
 
 # Render deploy-friendly startup
