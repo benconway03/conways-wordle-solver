@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Conway's Wordle Solver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Font for a friendly vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="card">
+    <h1>Conway's&nbsp;Wordle&nbsp;Solver</h1>
+
+    <form method="post" class="form-grid">
+      <label>
+        <span>Word</span>
+        <input type="text" name="word" placeholder="e.g. pineapple">
+      </label>
+
+      <label>
+        <span>Result</span>
+        <input type="text" name="result" placeholder="e.g. xygxy = grey, yellow, green, grey, yellow">
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    {% if output is not none %}
+      <section class="output">
+        <h2>Output</h2>
+        <p>{{ output }}</p>
+      </section>
+    {% endif %}
+  </main>
+
+  <footer>
+    Ben Conway is the coolest.
+  </footer>
+</body>
+</html>

@@ -1,5 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import random
+import os
 
 def wordle_solver(answer_list=[]):
 
@@ -93,39 +94,19 @@ def user_input(reset, new_input, new_input2):
 
 app = Flask(__name__)
 
-
 @app.route("/", methods=["GET", "POST"])
 def home():
-    output = ""
+    output = None
     if request.method == "POST":
-        word = request.form.get("word")
-        result = request.form.get("result")
-        if word == '' and result == '':
-            output = user_input(1, word, result)
-        else:
-            output = user_input(0, word, result)
+        word   = request.form.get("word", "")
+        result = request.form.get("result", "")
+        output = user_input(0 if (word or result) else 1, word, result)  # your logic
+    return render_template("index.html", output=output)
 
-    return f"""
-        <form method="post">
-            Enter a word: <input type="text" name="word">
-            Enter a result: <input type="text" name="result">
-            <input type="submit" value="Submit">
-        </form>
-        <div style="margin-top:20px; padding:10px; border:1px solid #000;">
-            <strong>Output:</strong> {output}
-        </div>
-
-                <!-- ✨ new footer block -->
-        <footer style="margin-top:40px; text-align:center; font-family:sans-serif;
-                       color:#666; font-style:italic;">
-            Ben Conway is the coolest.
-        </footer>
-
-    """
-
+# Render deploy-friendly startup
 if __name__ == "__main__":
-    app.run(debug=True)
-
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
 
 
     
