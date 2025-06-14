@@ -114,6 +114,13 @@ def home():
         <div style="margin-top:20px; padding:10px; border:1px solid #000;">
             <strong>Output:</strong> {output}
         </div>
+
+                <!-- ✨ new footer block -->
+        <footer style="margin-top:40px; text-align:center; font-family:sans-serif;
+                       color:#666; font-style:italic;">
+            Ben Conway is the coolest.
+        </footer>
+
     """
 
 if __name__ == "__main__":
