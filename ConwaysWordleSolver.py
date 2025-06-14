@@ -108,9 +108,13 @@ def home():
     if request.method == "POST":
         word   = request.form.get("word", "")
         result = request.form.get("result", "")
-        if len(word) != 5:
+        if len(word) != 5 and len(word) != 0:
             output = "The word should have 5 letters"
-        elif len(result) != 5:
+        elif len(result) != 5 and len(result) != 0:
+            output = "The result should have 5 letters"
+        elif len(result) == 5 and len(word) != 5:
+            output = "The word should have 5 letters"
+        elif len(result) != 5 and len(word) == 5:
             output = "The result should have 5 letters"
         elif any(ch not in "xygXYG" for ch in result):
             output = "The result should only contain x, y or g"
