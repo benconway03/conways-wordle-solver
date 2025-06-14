@@ -42,8 +42,50 @@
   </section>
   </main>
 
+  <button type="button" id="how-btn" class="secondary-btn">
+  How&nbsp;to&nbsp;Use
+</button>
+
+<!-- modal (hidden by default) -->
+<div id="how-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="how-close">&times;</span>
+    <h2>How to Use</h2>
+    <p>
+      • Start by pressing the <strong>Submit</strong> button
+      with both boxes left blank<br><br>
+      • Type the outputted 5-letter word into Wordle and note the colour
+      pattern you got back<br><br>
+      • Type the word you tried in Wordle into the top boxof the solver
+      and in the bottom box, type the colour pattern (Grey = X, Yellow = Y, Green = G) <br><br>
+      • Then press <strong>Submit</strong>, type the outputted word
+      into Wordle and repeat <br><br>
+      • To reset the memory, so that the website forgets previous words
+      you've tried and their results, press <strong>Submit</strong> with two blank boxes<br><br>
+      • Brendan sweats from his back
+    </p>
+  </div>
+</div>
+
+  <script>
+    const modal   = document.getElementById('how-modal');
+    const openBtn = document.getElementById('how-btn');
+    const closeBtn = document.getElementById('how-close');
+
+    openBtn.onclick  = () => modal.style.display = 'flex';
+    closeBtn.onclick = () => modal.style.display = 'none';
+
+    // click outside the modal closes it
+    window.onclick = e => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
+  </script>
+
   <footer>
     Ben Conway is the coolest.
   </footer>
+
+
+
 </body>
 </html>

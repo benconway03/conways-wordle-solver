@@ -101,3 +101,54 @@ footer {
   color: var(--muted);
   font-size: .85rem;
 }
+
+
+/* button variant */
+.secondary-btn {
+  margin-top: .5rem;
+  padding: .55rem .9rem;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.secondary-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* modal backdrop */
+.modal {
+  position: fixed;
+  inset: 0;                          /* top/right/bottom/left: 0 */
+  background: rgba(0,0,0,.6);
+  display: none;                     /* toggled to flex via JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* modal window */
+.modal-content {
+  max-width: 480px;
+  width: 90%;
+  background: var(--card-bg);
+  padding: 1.8rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+/* close (“×”) */
+.close {
+  float: right;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--muted);
+}
+.close:hover { color: var(--accent); }
+
