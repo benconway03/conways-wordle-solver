@@ -1,8 +1,5 @@
 from flask import Flask, request
-import pandas as pd
-import IPython.display as ipd
-import numpy as np
-
+import random
 
 def wordle_solver(answer_list=[]):
 
@@ -28,19 +25,16 @@ def wordle_solver(answer_list=[]):
         wordle_words = f.readlines()
         wordle_words = [line.strip() for line in wordle_words]
 
-    wordle_words_df = pd.DataFrame(wordle_words, columns=['word'])
-
-    wordle_words_df['value'] = wordle_words_df['word'].apply(value_word)
-
-    wordle_words_rand = wordle_words_df.sample(frac=1).reset_index(drop=True)
-
-    wordle_words_sort = wordle_words_rand.sort_values(by='value', ascending=True)
+    wordle_words_ranked = sorted(
+        wordle_words,
+        key=lambda w:(value_word(w), random.random())
+    )
 
     if answer_list != [['', '']]:
         answer_list = [item for item in answer_list if item != ['', '']]
 
     if answer_list == [['', '']]:
-        return wordle_words_sort['word'].iloc[0]
+        return wordle_words_ranked[0]
     
     else:
 
@@ -80,14 +74,9 @@ def wordle_solver(answer_list=[]):
                 good=0
             return good
         
-        wordle_words_sort['outcome_g']=wordle_words_sort['word'].apply(match_knowl_logic)
-        # print(maybes)
-        # print(knowledge)
-        # print(faults)
-        # print(exact_yellows)
-        # display(wordle_words_sort)
-        wordle_words_filt1 = wordle_words_sort[wordle_words_sort['outcome_g']==1]
-        return wordle_words_filt1['word'].iloc[0]
+        wordle_words_filt = [w for w in wordle_words_ranked if match_knowl_logic(w) == 1]
+
+        return wordle_words_filt[0]
 
 
 def user_input(reset, new_input, new_input2):
