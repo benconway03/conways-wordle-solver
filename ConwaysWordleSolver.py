@@ -76,17 +76,25 @@ def wordle_solver(answer_list=[]):
             return good
         
         wordle_words_filt = [w for w in wordle_words_ranked if match_knowl_logic(w) == 1]
+        if len(wordle_words_filt) != 0:
+            return wordle_words_filt[0]
+        else:
+            return "You've made an error"
 
-        return wordle_words_filt[0]
 
-
-def user_input(reset, new_input, new_input2):
+def user_input(reset, word, result):
     global items
     if reset == 1:
         items = []
+    try:
+        items
+    except NameError:
+        items = []
     actual_list = []
-    actual_list.append(new_input)
-    actual_list.append(new_input2)
+    word_lower=word.lower()
+    result_lower=result.lower()
+    actual_list.append(word_lower)
+    actual_list.append(result_lower)
 
     items.append(actual_list)
 
