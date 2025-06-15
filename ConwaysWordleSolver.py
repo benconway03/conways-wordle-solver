@@ -108,20 +108,22 @@ def home():
     if request.method == "POST":
         word   = request.form.get("word", "")
         result = request.form.get("result", "")
-        if len(word) != 5 and len(word) != 0:
+        word_strip = word.strip()
+        result_strip = result.strip()
+        if len(word_strip) != 5 and len(word_strip) != 0:
             output = "The word should have 5 letters"
-        elif len(result) != 5 and len(result) != 0:
+        elif len(result_strip) != 5 and len(result_strip) != 0:
             output = "The result should have 5 letters"
-        elif len(result) == 5 and len(word) != 5:
+        elif len(result_strip) == 5 and len(word_strip) != 5:
             output = "The word should have 5 letters"
-        elif len(result) != 5 and len(word) == 5:
+        elif len(result_strip) != 5 and len(word_strip) == 5:
             output = "The result should have 5 letters"
-        elif any(ch not in "xygXYG" for ch in result):
+        elif any(ch not in "xygXYG" for ch in result_strip):
             output = "The result should only contain x, y or g"
-        elif any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" for ch in word):
-            output = "The word should only contains characters in the alphabet"
+        elif any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" for ch in word_strip):
+            output = "The word should only contain characters in the alphabet"
         else:
-            output = user_input(0 if (word or result) else 1, word, result)  # your logic
+            output = user_input(0 if (word_strip or result_strip) else 1, word_strip, result_strip)  # your logic
     return render_template("index.html", output=output)
 
 # Render deploy-friendly startup
