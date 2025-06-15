@@ -123,10 +123,9 @@ def home():
         elif any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" for ch in word_strip):
             output = "The word should only contain characters in the alphabet"
         else:
-            output = user_input(0 if (word_strip or result_strip) else 1, word_strip, result_strip)  # your logic
+            output = user_input(0 if (word_strip or result_strip) else 1, word_strip, result_strip) 
     return render_template("index.html", output=output)
 
-# Render deploy-friendly startup
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
